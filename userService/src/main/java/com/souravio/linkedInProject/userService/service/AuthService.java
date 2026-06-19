@@ -48,7 +48,7 @@ public class AuthService {
         return modelMapper.map(user, UserDto.class);
     }
 
-    public String login(LoginRequestDto loginRequestDto) {
+    public String[] login(LoginRequestDto loginRequestDto) {
         log.info("Login request for user with email: {}", loginRequestDto.getEmail());
 
         User user = userRepository.findByEmail(loginRequestDto.getEmail()).orElseThrow(() -> new BadRequestException(
@@ -60,6 +60,15 @@ public class AuthService {
             throw new BadRequestException("Incorrect email or password");
         }
 
+        String[] arr = new String[2];
+        arr[0] = jwtService.generateAccessToken(user);
+        arr[1] = jwtService.generateRefreshToken(user);
+        return arr;
+    }
+
+    public String refreshToken(String refreshToken) {
+        Long userId =jwtService.getUserIdFromToken(refreshToken);
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         return jwtService.generateAccessToken(user);
     }
 }
