@@ -6,9 +6,9 @@ server.port: 9050
 eureka.client.service-url.defaultZone: http://localhost:8761/eureka
 
 cloudinary:
-  cloud-name: dkhj1rghl
-  api-key: 293799921697652
-  api-secret: CvOqPCrVkwDHIG5KoAVl5FRv4Oc
+  cloud-name: dittsojya
+  api-key: 859675426346492
+  api-secret: nqcC5ACwN4-pL3nruBbQljnfFbw
 
 gcloud:
   storage-bucket-name: p2-cs-linkedin
